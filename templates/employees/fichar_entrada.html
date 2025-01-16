@@ -1,0 +1,12 @@
+{% extends 'stock/base.html' %}
+
+{% block title %}Fichar Entrada{% endblock %}
+
+{% block content %}
+<h1>Fichar Entrada para {{ empleado.nombre }} {{ empleado.apellido }}</h1>
+<form method="post">
+  {% csrf_token %}
+  <p>DNI: {{ empleado.dni }}</p>
+  <button type="submit">Confirmar Entrada</button>
+</form>
+{% endblock %}

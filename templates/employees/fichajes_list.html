@@ -1,0 +1,31 @@
+{% extends 'stock/base.html' %}
+
+{% block title %}Listado de Fichajes{% endblock %}
+
+{% block content %}
+<h1>Listado de Fichajes</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Empleado</th>
+      <th>Entrada</th>
+      <th>Salida</th>
+      <th>Duración (horas)</th>
+      <th>Automática</th>
+      <th>Incidencia</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for f in fichajes %}
+    <tr>
+      <td>{{ f.empleado.nombre }} {{ f.empleado.apellido }}</td>
+      <td>{{ f.fecha_entrada }}</td>
+      <td>{{ f.fecha_salida|default:"--" }}</td>
+      <td>{{ f.horas_trabajadas|floatformat:2 }}</td>
+      <td>{{ f.automatica }}</td>
+      <td>{{ f.incidencia|default:"--" }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

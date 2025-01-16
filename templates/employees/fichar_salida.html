@@ -1,0 +1,13 @@
+{% extends 'stock/base.html' %}
+
+{% block title %}Fichar Salida{% endblock %}
+
+{% block content %}
+<h1>Fichar Salida</h1>
+<p>Empleado: {{ fichaje.empleado.nombre }} {{ fichaje.empleado.apellido }}</p>
+<p>Fecha de Entrada: {{ fichaje.fecha_entrada }}</p>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Confirmar Salida</button>
+</form>
+{% endblock %}

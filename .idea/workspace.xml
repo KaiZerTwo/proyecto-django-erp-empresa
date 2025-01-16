@@ -4,20 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e1e8b5e-67ae-4fb6-8411-d6d8c087171e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/DjangoProject.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employees/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/stock/static/stock/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/stock/templates/stock/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/stock/templates/stock/pedidos_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/stock/templates/stock/productos_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/stock/templates/stock/proveedores_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/stock/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/urls.py" afterDir="false" />
+    <list default="true" id="4e1e8b5e-67ae-4fb6-8411-d6d8c087171e" name="Changes" comment="primer commit">
+      <change afterPath="$PROJECT_DIR$/templates/employees/error.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/employees/fichajes_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/employees/fichar_entrada.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/employees/fichar_salida.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock/templates/stock/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/stock/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock/templates/stock/pedidos_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/stock/pedidos_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock/templates/stock/productos_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/stock/productos_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stock/templates/stock/proveedores_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/stock/proveedores_list.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,14 +26,26 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "KaiZerTwo"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/KaiZerTwo/proyecto-django-erp-empresa.git",
+    "accountId": "196419f0-3c29-43ae-9bc7-7583fab91c7a"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -71,6 +79,7 @@
       <recent name="C:\Users\franc\PycharmProjects\DjangoProject\employees" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\franc\PycharmProjects\DjangoProject\templates" />
       <recent name="C:\Users\franc\PycharmProjects\DjangoProject\stock\templates" />
     </key>
   </component>
@@ -117,8 +126,17 @@
       <option name="presentableId" value="Default" />
       <updated>1736613525160</updated>
       <workItem from="1736613526097" duration="483000" />
-      <workItem from="1736614045043" duration="11919000" />
+      <workItem from="1736614045043" duration="18544000" />
     </task>
+    <task id="LOCAL-00001" summary="primer commit">
+      <option name="closed" value="true" />
+      <created>1736947249931</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1736947249931</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,5 +152,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="primer commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="primer commit" />
   </component>
 </project>
