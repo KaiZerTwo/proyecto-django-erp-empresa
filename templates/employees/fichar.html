@@ -1,0 +1,30 @@
+{% extends 'employees/base_employees.html' %}
+
+{% block title %}Fichar{% endblock %}
+
+{% block content %}
+<div class="card shadow p-4">
+  <h1 class="mb-4 text-center">Fichaje de Empleado</h1>
+
+  {% if messages %}
+    <div class="alert alert-info">
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <form method="post" class="text-center">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="dni" class="form-label">Introduce tu DNI:</label>
+      <input type="text" name="dni" id="dni" class="form-control" placeholder="Ingresa tu DNI" required>
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg">Fichar</button>
+  </form>
+
+  <div class="text-center mt-4">
+    <a href="{% url 'employees:fichajes_list' %}" class="btn btn-secondary">Ver Lista de Fichajes</a>
+  </div>
+</div>
+{% endblock %}

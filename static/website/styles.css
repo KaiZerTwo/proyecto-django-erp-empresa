@@ -1,0 +1,28 @@
+/* website/static/website/css/styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Color claro de fondo */
+    color: #333;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #343a40; /* Texto oscuro */
+}
+
+.restaurant-buttons .restaurant-btn {
+    font-size: 1.25rem;
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.restaurant-buttons .armentia:hover {
+    background-color: #b71c1c; /* Rojo oscuro */
+}
+
+.restaurant-buttons .marina:hover {
+    background-color: #1c3db7; /* Azul oscuro */
+}

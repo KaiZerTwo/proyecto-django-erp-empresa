@@ -1,31 +1,102 @@
-{% extends 'stock/base.html' %}
+{% extends 'employees/base_employees.html' %}
+{% load static %}
 
-{% block title %}Listado de Fichajes{% endblock %}
+{% block title %}Lista de Fichajes{% endblock %}
 
 {% block content %}
-<h1>Listado de Fichajes</h1>
-<table>
-  <thead>
+<h1 class="text-center mb-4">Fichajes Registrados</h1>
+
+<!-- Formulario de búsqueda -->
+<form method="GET" class="mb-4">
+  <div class="row g-2">
+    <div class="col-md-4">
+      <input type="text" name="q" class="form-control" placeholder="Buscar por nombre o apellido" value="{{ request.GET.q }}">
+    </div>
+    <div class="col-md-3">
+      <input type="date" name="start_date" class="form-control" value="{{ request.GET.start_date }}">
+    </div>
+    <div class="col-md-3">
+      <input type="date" name="end_date" class="form-control" value="{{ request.GET.end_date }}">
+    </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-primary">Filtrar</button>
+      <a href="{% url 'employees:fichajes_list' %}" class="btn btn-secondary">Limpiar</a>
+    </div>
+  </div>
+</form>
+
+<!-- Gráfico de horas trabajadas por empleado -->
+<div class="card shadow p-4 mt-4">
+  <h2 class="text-center">Total de Horas Trabajadas</h2>
+  <canvas id="horasChart"></canvas>
+</div>
+
+<table class="table table-bordered mt-4">
+  <thead class="table-dark">
     <tr>
       <th>Empleado</th>
-      <th>Entrada</th>
-      <th>Salida</th>
-      <th>Duración (horas)</th>
-      <th>Automática</th>
-      <th>Incidencia</th>
+      <th>Fecha Entrada</th>
+      <th>Fecha Salida</th>
+      <th>Tiempo Trabajado</th>
     </tr>
   </thead>
   <tbody>
-    {% for f in fichajes %}
-    <tr>
-      <td>{{ f.empleado.nombre }} {{ f.empleado.apellido }}</td>
-      <td>{{ f.fecha_entrada }}</td>
-      <td>{{ f.fecha_salida|default:"--" }}</td>
-      <td>{{ f.horas_trabajadas|floatformat:2 }}</td>
-      <td>{{ f.automatica }}</td>
-      <td>{{ f.incidencia|default:"--" }}</td>
-    </tr>
+    {% for fichaje in fichajes %}
+      <tr>
+        <td>{{ fichaje.empleado.nombre }} {{ fichaje.empleado.apellido }}</td>
+        <td>{{ fichaje.fecha_entrada }}</td>
+        <td>{{ fichaje.fecha_salida|default:"-" }}</td>
+        <td>{{ fichaje.horas_y_minutos_trabajados }}</td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="4" class="text-center">No se encontraron fichajes.</td>
+      </tr>
     {% endfor %}
   </tbody>
 </table>
+
+<div class="text-center mt-4">
+  <a href="{% url 'employees:fichar' %}" class="btn btn-secondary">Volver a Fichar</a>
+</div>
+
+<!-- Cargar Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Obtener datos desde Django
+  var empleados = JSON.parse('{{ empleados|safe }}');
+  var horas = JSON.parse('{{ horas|safe }}');
+  var colores = ['#FF5733', '#33FF57', '#3357FF', '#FF33A6', '#F4FF33', '#FF8C00', '#00CED1'];
+
+  // Configuración del gráfico de tipo "pie"
+  var ctx = document.getElementById('horasChart').getContext('2d');
+  var horasChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: empleados,
+      datasets: [{
+        label: 'Horas trabajadas',
+        data: horas,
+        backgroundColor: colores.slice(0, empleados.length),  // Colores dinámicos según empleados
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom',
+        },
+        tooltip: {
+          callbacks: {
+            label: function(tooltipItem) {
+              return empleados[tooltipItem.dataIndex] + ': ' + horas[tooltipItem.dataIndex] + ' horas';
+            }
+          }
+        }
+      }
+    }
+  });
+</script>
+
 {% endblock %}

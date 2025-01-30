@@ -1,0 +1,119 @@
+{% extends 'stock/base_stock.html' %}
+
+{% block title %}Dashboard de Stock{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">Dashboard de Gestión de Stock</h1>
+
+<!-- Tarjetas de resumen -->
+<div class="row mb-4">
+  <div class="col-md-4">
+    <div class="card text-center shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Productos</h5>
+        <p class="card-text display-4">{{ total_productos }}</p>
+        <a href="{% url 'stock:productos_list' %}" class="btn btn-primary">Ver Productos</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card text-center shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Proveedores</h5>
+        <p class="card-text display-4">{{ total_proveedores }}</p>
+        <a href="{% url 'stock:proveedores_list' %}" class="btn btn-primary">Ver Proveedores</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card text-center shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Pedidos</h5>
+        <p class="card-text display-4">{{ total_pedidos }}</p>
+        <a href="{% url 'stock:pedidos_list' %}" class="btn btn-primary">Ver Pedidos</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Gráficos -->
+<div class="row">
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Stock de Productos</h5>
+        <canvas id="stockChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Pedidos por Mes</h5>
+        <canvas id="pedidosChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script para los gráficos -->
+<script>
+  // Datos para el gráfico de stock de productos
+  const stockData = {
+    labels: ['Producto A', 'Producto B', 'Producto C', 'Producto D'],
+    datasets: [{
+      label: 'Stock Disponible',
+      data: [30, 50, 20, 40],
+      backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
+    }]
+  };
+
+  // Configuración del gráfico de stock
+  const stockConfig = {
+    type: 'bar',
+    data: stockData,
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+      }
+    },
+  };
+
+  // Renderizar el gráfico de stock
+  const stockChart = new Chart(document.getElementById('stockChart'), stockConfig);
+
+  // Datos para el gráfico de pedidos por mes
+  const pedidosData = {
+    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+    datasets: [{
+      label: 'Pedidos',
+      data: [12, 19, 3, 5, 2, 3],
+      borderColor: '#4e73df',
+      fill: false,
+    }]
+  };
+
+  // Configuración del gráfico de pedidos
+  const pedidosConfig = {
+    type: 'line',
+    data: pedidosData,
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+      }
+    },
+  };
+
+  // Renderizar el gráfico de pedidos
+  const pedidosChart = new Chart(document.getElementById('pedidosChart'), pedidosConfig);
+</script>
+{% endblock %}

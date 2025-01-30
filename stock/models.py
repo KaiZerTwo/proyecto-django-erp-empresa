@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.mail.backends.smtp import EmailBackend
 
 
 class Proveedor(models.Model):
@@ -77,3 +78,23 @@ class DetallePedido(models.Model):
 
     def __str__(self):
         return f"{self.producto.nombre} - {self.cantidad} {self.producto.unidad_medida}"
+
+
+class EmailConfig(models.Model):
+    email = models.EmailField()
+    password = models.CharField(max_length=128)
+    host = models.CharField(max_length=128, default="smtp.gmail.com")
+    port = models.PositiveIntegerField(default=587)
+    use_tls = models.BooleanField(default=True)
+
+    def get_connection(self):
+        return EmailBackend(
+            host=self.host,
+            port=self.port,
+            username=self.email,
+            password=self.password,
+            use_tls=self.use_tls,
+        )
+
+    def __str__(self):
+        return f"Configuración: {self.email}"

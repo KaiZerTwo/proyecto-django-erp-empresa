@@ -65,7 +65,7 @@ class FichajeAdmin(admin.ModelAdmin):
         'empleado',
         'automatica',
         IncidenciaFilter,
-        HorasFilter6,  # si quieres filtrar por <6h o >=6h
+        HorasFilter6,
     )
     search_fields = (
         'empleado__dni',
@@ -78,8 +78,8 @@ class FichajeAdmin(admin.ModelAdmin):
     readonly_fields = ('duracion',)
 
     def duracion_horas(self, obj):
-        return f"{obj.horas_trabajadas():.2f} h"
-    duracion_horas.short_description = 'Horas'
+        return obj.horas_y_minutos_trabajados()
+    duracion_horas.short_description = 'Tiempo Trabajado'
 
     def colored_incidencia(self, obj):
         """

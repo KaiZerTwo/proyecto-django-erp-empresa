@@ -1,0 +1,77 @@
+/* Fondo de la página */
+body {
+    background-color: #f8f9fa;
+}
+
+/* Estilos para títulos */
+h1 {
+    color: #007bff;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Estilización de las tablas */
+.table {
+    background-color: #ffffff;
+}
+
+.table th {
+    text-align: center;
+}
+
+/* Efecto hover en las tarjetas */
+.card {
+    transition: all 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Estilización de badges (etiquetas de estado) */
+.badge {
+    font-size: 1rem;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+/* Botones con esquinas redondeadas */
+.btn {
+    border-radius: 20px;
+}
+
+/* Texto gris oscuro para elementos deshabilitados o informativos */
+.text-muted {
+    font-weight: bold;
+    color: #6c757d;
+}
+
+/* Estilización de enlaces */
+a.text-decoration-none {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a.text-decoration-none:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Estilo adicional para alertas y mensajes */
+.alert {
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+}
+
+/* Mejor espaciado en formularios */
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+    padding: 10px;
+}
+
+form .btn {
+    width: 100%;
+    font-size: 1.2rem;
+}

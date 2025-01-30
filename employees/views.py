@@ -1,51 +1,107 @@
 # employees/views.py
-
-from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Sum, F, ExpressionWrapper, DurationField
+from django.utils.dateparse import parse_date
+import json
+from django.shortcuts import render, redirect
 from django.utils import timezone
+from django.contrib import messages
 from .models import Empleado, Fichaje
 
-
-def fichar_entrada(request, empleado_id):
+def fichar(request):
     """
-    Marca la entrada del empleado (si no tiene un fichaje abierto).
+    Vista única para fichar entrada o salida según el estado del empleado.
     """
-    empleado = get_object_or_404(Empleado, id=empleado_id)
-
     if request.method == 'POST':
-        # Verificamos si ya tiene un fichaje abierto (fecha_salida = None)
+        dni = request.POST.get('dni', '').strip()
+
+        if not dni:
+            messages.error(request, 'Por favor, introduce tu DNI.')
+            return redirect('employees:fichar')
+
+        empleado = Empleado.objects.filter(dni=dni).first()
+
+        if not empleado:
+            messages.error(request, 'Empleado no encontrado.')
+            return redirect('employees:fichar')
+
+        # Buscar un fichaje abierto (sin fecha_salida registrada)
         fichaje_abierto = Fichaje.objects.filter(empleado=empleado, fecha_salida__isnull=True).first()
+
         if fichaje_abierto:
-            # Podrías mostrar un error, o redirigir, etc.
-            return render(request, 'employees/error.html', {
-                'mensaje': 'Ya tienes un fichaje abierto. Cierra antes de abrir otro.'
-            })
+            # Registrar salida porque hay una entrada abierta
+            fichaje_abierto.fecha_salida = timezone.now()
+            fichaje_abierto.save()
+            messages.success(request, f'{empleado.nombre} {empleado.apellido} ha fichado su SALIDA correctamente.')
+        else:
+            # Registrar nueva entrada
+            Fichaje.objects.create(
+                empleado=empleado,
+                fecha_entrada=timezone.now()
+            )
+            messages.success(request, f'{empleado.nombre} {empleado.apellido} ha fichado su ENTRADA correctamente.')
 
-        # Crear un nuevo fichaje con fecha_entrada = ahora
-        Fichaje.objects.create(
-            empleado=empleado,
-            fecha_entrada=timezone.now()
-        )
-        return redirect('employees:fichajes_list')
+        return redirect('employees:fichar')
 
-    return render(request, 'employees/fichar_entrada.html', {'empleado': empleado})
-
-
-def fichar_salida(request, fichaje_id):
-    """
-    Marca la salida del fichaje abierto.
-    """
-    fichaje = get_object_or_404(Fichaje, id=fichaje_id)
-    if request.method == 'POST':
-        fichaje.fecha_salida = timezone.now()
-        fichaje.save()
-        return redirect('employees:fichajes_list')
-
-    return render(request, 'employees/fichar_salida.html', {'fichaje': fichaje})
+    return render(request, 'employees/fichar.html')
 
 
 def fichajes_list(request):
-    """
-    Lista todos los fichajes, ordenados por fecha de entrada descendente.
-    """
+    query = request.GET.get('q', '')
+    start_date = request.GET.get('start_date')
+    end_date = request.GET.get('end_date')
+
     fichajes = Fichaje.objects.select_related('empleado').order_by('-fecha_entrada')
-    return render(request, 'employees/fichajes_list.html', {'fichajes': fichajes})
+
+    # Filtrar por nombre o apellido si se ingresa en el formulario
+    if query:
+        fichajes = fichajes.filter(
+            empleado__nombre__icontains=query
+        ) | fichajes.filter(
+            empleado__apellido__icontains=query
+        )
+
+    # Filtrar por rango de fechas
+    if start_date and end_date:
+        fichajes = fichajes.filter(
+            fecha_entrada__date__gte=parse_date(start_date),
+            fecha_salida__date__lte=parse_date(end_date)
+        )
+
+    # Agrupar y sumar la duración total por empleado y fecha de entrada
+    horas_por_empleado = fichajes.values(
+        'empleado__nombre', 'empleado__apellido', 'fecha_entrada__date'
+    ).annotate(
+        total_horas=Sum(
+            ExpressionWrapper(F('duracion'), output_field=DurationField())
+        )
+    )
+
+    # Preparar datos para el gráfico
+    empleados_totales = {}
+    for ficha in horas_por_empleado:
+        empleado_nombre = f"{ficha['empleado__nombre']} {ficha['empleado__apellido']}"
+        total_horas = ficha['total_horas']
+
+        # 🔥 **Corrección: Manejar NoneType**
+        if total_horas is None:
+            horas_trabajadas = 0  # Si no hay salida, asumimos 0 horas trabajadas
+        else:
+            horas_trabajadas = total_horas.total_seconds() / 3600
+
+        # Sumar las horas trabajadas por día
+        if empleado_nombre in empleados_totales:
+            empleados_totales[empleado_nombre] += horas_trabajadas
+        else:
+            empleados_totales[empleado_nombre] = horas_trabajadas
+
+    empleados_nombres = list(empleados_totales.keys())
+    horas_totales = [round(horas, 2) for horas in empleados_totales.values()]
+
+    context = {
+        'fichajes': fichajes,
+        'empleados': json.dumps(empleados_nombres),
+        'horas': json.dumps(horas_totales),
+    }
+
+    return render(request, 'employees/fichajes_list.html', context)
+

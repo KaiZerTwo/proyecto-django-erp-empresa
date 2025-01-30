@@ -78,6 +78,31 @@ class Fichaje(models.Model):
         else:
             return 0.0
 
+    def horas_y_minutos_trabajados(self) -> str:
+        """
+        Retorna la duración en formato "X horas y Y minutos", asegurando que los minutos
+        se muestren correctamente cuando no se ha completado una hora completa.
+        """
+
+        if self.duracion is not None:
+            total_minutos = int(self.duracion.total_seconds() // 60)
+        elif self.fecha_entrada and not self.fecha_salida:
+            total_minutos = int((timezone.now() - self.fecha_entrada).total_seconds() // 60)
+        else:
+            return "0 horas y 0 minutos"
+
+        # Calcular horas completas y minutos restantes
+        horas = total_minutos // 60
+        minutos = total_minutos % 60
+
+        # Formatear el resultado dependiendo del tiempo total
+        if total_minutos < 60:
+            return f"{minutos} minutos"
+        elif minutos == 0:
+            return f"{horas} horas"
+        else:
+            return f"{horas} horas y {minutos} minutos"
+
     def horas_trabajadas_dentro_de_rango(self, inicio, fin) -> float:
         """
         Para casos donde el fichaje cruza medianoche u otro rango.
@@ -94,3 +119,4 @@ class Fichaje(models.Model):
     def __str__(self):
         salida = self.fecha_salida if self.fecha_salida else '---'
         return f"Fichaje {self.pk} - {self.empleado} ({self.fecha_entrada} -> {salida})"
+

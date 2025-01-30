@@ -1,10 +1,6 @@
-# website/urls.py
-from django.urls import path
-from . import views  # asumiendo que tendrás vistas en website/views.py
+# apps/website/views.py
+from django.shortcuts import render
 
-app_name = 'website'  # (opcional, ayuda a namespacing)
+def home(request):
+    return render(request, 'templates/website/home.html')
 
-urlpatterns = [
-    # Ejemplo de ruta (pon al menos una)
-    # path('', views.index, name='index'),
-]

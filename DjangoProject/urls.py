@@ -16,10 +16,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
+# Importar solo la vista necesaria
+from website.views import home
+
+# Definir urlpatterns correctamente antes de añadir rutas estáticas
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('stock/', include('stock.urls')),
+    path('', home, name='home'),  # Página principal
+    path('home/', home, name='home'),  # Alias de /home
     path('employees/', include('employees.urls')),
-    path('website/', include('website.urls')),
+    path('stock/', include('stock.urls')),
 ]
+
+# Solo agregar rutas estáticas en desarrollo (DEBUG=True)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
