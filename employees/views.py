@@ -5,6 +5,8 @@ import json
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.contrib import messages
+
+from .forms import EmpleadoForm
 from .models import Empleado, Fichaje
 
 def fichar(request):
@@ -104,4 +106,19 @@ def fichajes_list(request):
     }
 
     return render(request, 'employees/fichajes_list.html', context)
+def employees_home(request):
+    """Vista principal de empleados"""
+    return render(request, 'employees/employees.html')
 
+def add_employee(request):
+    """Vista para agregar un nuevo empleado"""
+    if request.method == "POST":
+        form = EmpleadoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Empleado agregado correctamente.")
+            return redirect('employees:home')
+    else:
+        form = EmpleadoForm()
+
+    return render(request, 'employees/add_employee.html', {'form': form})

@@ -30,54 +30,72 @@ class Producto(models.Model):
         ('PK', 'Paquetes'),
     ]
 
-    TIPOS_COMIDA_CHOICES = [
-        ('Carne', 'Carne'),
-        ('Pescado', 'Pescado'),
-        ('Verdura', 'Verdura'),
-        ('Fruta', 'Fruta'),
-        ('Panadería', 'Panadería'),
+    MONEDAS_CHOICES = [
+        ('EUR', '€ - Euro'),
+        ('USD', '$ - Dólar'),
+        ('GBP', '£ - Libra Esterlina'),
     ]
 
-    # 2. Reemplazamos el antiguo campo 'categoria' (CharField) por una ForeignKey a Categoria
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name="productos")
+    # Eliminamos TIPOS_COMIDA_CHOICES porque ya tenemos categoria
 
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name="productos")
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField(blank=True, null=True)
     precio = models.DecimalField(max_digits=10, decimal_places=2)
-    tipo_comida = models.CharField(max_length=50, choices=TIPOS_COMIDA_CHOICES, blank=True, null=True)
+    moneda = models.CharField(max_length=3, choices=MONEDAS_CHOICES, default='EUR')  # Nueva opción de moneda
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
     stock = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    unidad_medida = models.CharField(max_length=2, choices=UNIDADES_CHOICES, default='UN')
+    unidad_medida = models.CharField(max_length=5, choices=UNIDADES_CHOICES, default='UN')  # Aumentamos a 5 caracteres
+
+    def precio_con_moneda(self):
+        """
+        Muestra el precio con el símbolo de la moneda.
+        """
+        simbolos = {'EUR': '€', 'USD': '$', 'GBP': '£'}
+        return f"{self.precio} {simbolos.get(self.moneda, '€')}"
 
     def __str__(self):
         return f"{self.nombre} - {self.categoria} ({self.proveedor.nombre})"
 
 
+
 class Pedido(models.Model):
     ESTADOS_CHOICES = [
-        ('Pendiente', 'Pendiente de Validar'),
-        ('Validado', 'Validado'),
+        ('Pendiente', 'Pendiente de Enviar'),
         ('Enviado', 'Enviado'),
     ]
 
-    proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)  # Relación con Proveedor
+    proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
     estado = models.CharField(max_length=10, choices=ESTADOS_CHOICES, default='Pendiente')
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
-    fecha_envio = models.DateTimeField(blank=True, null=True)  # Opcional: Fecha de envío
-    observaciones = models.TextField(blank=True, null=True)  # Campo para comentarios adicionales
+    fecha_creacion = models.DateTimeField(auto_now_add=True)  # Se guarda automáticamente
+    fecha_envio = models.DateTimeField(blank=True, null=True)
+    observaciones = models.TextField(blank=True, null=True)  # Observaciones del pedido
+    comentario = models.TextField(blank=True, null=True)  # Comentario general
 
     def __str__(self):
         return f"Pedido {self.id} - {self.proveedor.nombre} ({self.estado})"
 
 
+
 class DetallePedido(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name="detalles")
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    cantidad = models.DecimalField(max_digits=10, decimal_places=2)
-    comentario = models.TextField(blank=True, null=True)  # Ej: Notas adicionales del producto
+    cantidad = models.IntegerField(default=1)  # Ahora solo acepta números enteros
+    comentario = models.TextField(blank=True, null=True)
+
+    def subtotal(self):
+        """Calcula el subtotal por producto"""
+        return self.cantidad * self.producto.precio
+
+    def save(self, *args, **kwargs):
+        if self.producto.proveedor != self.pedido.proveedor:
+            raise ValueError("El producto no pertenece al proveedor de este pedido.")
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.producto.nombre} - {self.cantidad} {self.producto.unidad_medida}"
+
+
 
 
 class EmailConfig(models.Model):

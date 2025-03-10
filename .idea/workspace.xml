@@ -4,40 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e1e8b5e-67ae-4fb6-8411-d6d8c087171e" name="Changes" comment="commit  ompleto">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/employees/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/website/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/employees/base_employees.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/employees/fichar.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/stock/dashboard.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/website/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/DjangoProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DjangoProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="4e1e8b5e-67ae-4fb6-8411-d6d8c087171e" name="Changes" comment="commit  antes de comenazar ocn los microservicios">
+      <change afterPath="$PROJECT_DIR$/employees/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/auth_service/users/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/auth_service/users/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/employees_service/fichajes/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservices/employees_service/fichajes/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/admin/js/filtro_productos.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stock/pedidoForm.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stock/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/employees/add_employee.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/employees/employees.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/stock/editar_pedido.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/stock/hacer_pedido.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoProject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoProject/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employees/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/employees/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employees/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/employees/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/employees/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/employees/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/employees/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/employees/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stock/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stock/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock/static/stock/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/stock/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stock/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stock/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/employees/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/employees/error.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/employees/fichajes_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/employees/fichajes_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/employees/fichar_entrada.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/employees/fichar_salida.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/stock/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/stock/base_stock.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/stock/pedidos_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/stock/pedidos_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/stock/productos_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/stock/productos_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/stock/proveedores_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/stock/proveedores_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/website/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/website/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,8 +43,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="CSS File" />
+        <option value="Python Script" />
+        <option value="JavaScript File" />
         <option value="HTML File" />
       </list>
     </option>
@@ -90,7 +84,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/franc/Downloads/empresa_Django&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/franc/PycharmProjects/DjangoProject/microservices/auth_service/users&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -108,10 +102,12 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\franc\PycharmProjects\DjangoProject\microservices\auth_service\users" />
       <recent name="C:\Users\franc\PycharmProjects\DjangoProject\website" />
       <recent name="C:\Users\franc\PycharmProjects\DjangoProject\employees" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\franc\PycharmProjects\DjangoProject\microservices" />
       <recent name="C:\Users\franc\PycharmProjects\DjangoProject" />
       <recent name="C:\Users\franc\PycharmProjects\DjangoProject\DjangoProject\static" />
       <recent name="C:\Users\franc\PycharmProjects\DjangoProject\templates" />
@@ -147,8 +143,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-PY-243.23654.177" />
-        <option value="bundled-python-sdk-91d3a02ef49d-43b77aa2d136-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.23654.177" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PY-243.25659.43" />
+        <option value="bundled-python-sdk-181015f7ab06-4df51de95216-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.25659.43" />
       </set>
     </attachedChunks>
   </component>
@@ -170,7 +166,20 @@
       <workItem from="1737736274748" duration="7738000" />
       <workItem from="1737848606673" duration="1038000" />
       <workItem from="1738003978720" duration="7368000" />
-      <workItem from="1738261120979" duration="3154000" />
+      <workItem from="1738261120979" duration="20988000" />
+      <workItem from="1738428789015" duration="708000" />
+      <workItem from="1738691657002" duration="16281000" />
+      <workItem from="1739213257608" duration="7856000" />
+      <workItem from="1739637515241" duration="4235000" />
+      <workItem from="1739904598357" duration="12354000" />
+      <workItem from="1740241410896" duration="4507000" />
+      <workItem from="1740246118437" duration="1000" />
+      <workItem from="1740246235459" duration="298000" />
+      <workItem from="1740509086975" duration="442000" />
+      <workItem from="1740509842156" duration="16099000" />
+      <workItem from="1740848956656" duration="1183000" />
+      <workItem from="1741114454973" duration="712000" />
+      <workItem from="1741364550007" duration="6154000" />
     </task>
     <task id="LOCAL-00001" summary="primer commit">
       <option name="closed" value="true" />
@@ -188,7 +197,23 @@
       <option name="project" value="LOCAL" />
       <updated>1737045102141</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="commit  antes de comenazar ocn los microservicios">
+      <option name="closed" value="true" />
+      <created>1738265633776</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1738265633776</updated>
+    </task>
+    <task id="LOCAL-00004" summary="commit  antes de comenazar ocn los microservicios">
+      <option name="closed" value="true" />
+      <created>1738265651342</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1738265651342</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,6 +236,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="primer commit" />
     <MESSAGE value="commit  ompleto" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit  ompleto" />
+    <MESSAGE value="commit  antes de comenazar ocn los microservicios" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit  antes de comenazar ocn los microservicios" />
   </component>
 </project>

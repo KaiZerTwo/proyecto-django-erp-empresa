@@ -1,6 +1,9 @@
-# apps/website/views.py
-from django.shortcuts import render
+from django.urls import path
+from .views import home
 
-def home(request):
-    return render(request, 'templates/website/home.html')
+app_name = 'website'  # Si usas 'website:home' en las plantillas
+
+urlpatterns = [
+    path('', home, name='home'),
+]
 

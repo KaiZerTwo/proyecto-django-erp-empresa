@@ -1,0 +1,14 @@
+{% extends 'employees/base_employees.html' %}
+
+{% block title %}Empleados{% endblock %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h1 class="mb-4">Gestión de Empleados</h1>
+    <div class="d-flex justify-content-center gap-3">
+        <a href="{% url 'employees:fichajes_list' %}" class="btn btn-primary">Ver Fichajes</a>
+        <a href="{% url 'employees:fichar' %}" class="btn btn-warning">Fichar</a>
+        <a href="{% url 'employees:add_employee' %}" class="btn btn-success">Añadir Empleado</a>
+    </div>
+</div>
+{% endblock %}
